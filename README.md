@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Mongo Kubernetes Replica Set Sidecar
 
 This project is as a PoC to setup a mongo replica set using Kubernetes. It should handle resizing of any type and be
@@ -171,3 +172,6 @@ TODO: Instructions for cloning, mounting and watching
 - Add tests!
 - Add to circleCi
 - Alter k8s call so that we don't have to filter in memory
+=======
+# mongo-k8s-sidecar
+>>>>>>> eca8ff8ca139566c555895b7281e9799d2a6d7de
