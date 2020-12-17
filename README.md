@@ -1,5 +1,5 @@
 # Mongo Kubernetes Replica Set Sidecar
-
+---
 This project is as a PoC to setup a mongo replica set using Kubernetes. It should handle resizing of any type and be
 resilient to the various conditions both mongo and kubernetes can find themselves in.
 
