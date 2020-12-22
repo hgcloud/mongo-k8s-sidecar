@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM gcr.io/library/node/node:14.15.1-alpine
 MAINTAINER Charles Vallance <vallance.charles@gmail.com>
 
 WORKDIR /opt/cvallance/mongo-k8s-sidecar
