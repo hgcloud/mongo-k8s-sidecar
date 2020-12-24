@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage('Prepare') {
             when {
-                branch 'main'
+                branch 'origin/main'
             }
             steps {
                 echo "1.Prepare Stage"
