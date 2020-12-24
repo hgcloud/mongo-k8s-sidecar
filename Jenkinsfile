@@ -13,11 +13,7 @@ pipeline {
                 //echo "${build_tag}"
                 checkout scm
                 script {
-                    build_tag = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
-                    echo env.GIT_BRANCH
-                    if (env.GIT_BRANCH != 'main') {
-                        build_tag = "${env.BRANCH_NAME}-${build_tag}"
-                    }
+                    build_tag = "${env.BRANCH_NAME}-${sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()}"
                 }
                 echo "build_tag: ${build_tag}"
             }
