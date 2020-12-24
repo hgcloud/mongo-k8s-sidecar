@@ -6,7 +6,7 @@ pipeline {
         stage('Prepare') {
             steps {
                 echo "1.Prepare Stage"
-                checkout scm
+                //checkout scm
                 //script {
                 //    build_tag = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
                 //    if (env.BRANCH_NAME != 'master') {
@@ -25,7 +25,7 @@ pipeline {
                 echo "3.Build Docker Image Stage"
                 script {
                    echo "build tag: ${build_tag}"
-                   result = sh(script: 'docker images|grep gcr.io|grep mongo-k8s-sidecar|grep "${build_tag}"', returnStatus: false)
+                   result = sh(script: 'docker images|grep \'gcr.io/library/cvallance/mongo-k8s-sidecar\'|grep "${build_tag}"', returnStatus: true)
                    echo "${result}"
                 }
             }
