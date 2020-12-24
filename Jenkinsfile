@@ -29,7 +29,6 @@ pipeline {
                    if ( result == 0 ) {
                        sh(script: "docker rmi gcr.io/library/cvallance/mongo-k8s-sidecar:${build_tag}", returnStdout: true)
                    }
-                   sh(script:"sleep 300", returnStdout: true)
                    sh(script: "docker build . -t gcr.io/library/cvallance/mongo-k8s-sidecar:${build_tag}", returnStdout: true)
                 }
             }
@@ -37,6 +36,10 @@ pipeline {
         stage('Push') {
             steps {
                 echo "4.Push Docker Image Stage"
+                withCredentials([usernamePassword(credentialsId: 'gcrRegistry', passwordVariable: 'gcrRegistryPassword', usernameVariable: 'gcrRegistryUser')]) {
+                    sh("docker login -u ${gcrRegistryUser} -p ${gcrRegistryPassword} gcr.io", returnStdout: true)
+                    sh("docker push gcr.io/library/cvallance/mongo-k8s-sidecar:${build_tag}", returnStdout: true)
+                }
             }
         }
         stage('YAML') {
