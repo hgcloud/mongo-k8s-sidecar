@@ -13,7 +13,7 @@ pipeline {
                 //echo "${build_tag}"
                 checkout scm
                 script {
-                    echo "build tag: ${build_tag}"
+                    //echo "build tag: ${build_tag}"
                 }
             }
         }
@@ -24,7 +24,20 @@ pipeline {
         }
         stage('Build') {
             steps {
-                echo "3.Build Docker Image Stage"
+                script {
+                    echo "3.Build Docker Image Stage"
+                    echo "workspace:`pwd`"
+                    echo "build tag: ${build_tag}"
+                    sh "docker images|grep 'mongo-k8s-sidecar'|grep  ${build_tag} > /dev/null 2>&1"
+                    if [ $? -eq 0 ]; then
+                        sh "docker rmi gcr.io/library/cvallance/mongo-k8s-sidecar:${build_tag}"
+                    fi
+
+                    sh "docker build . -t gcr.io/library/cvallance/mongo-k8s-sidecar:${build_tag}"
+                    sh "docker login gcr.io -u admin -p Harbor12345"
+                    sh "docker push gcr.io/library/cvallance/mongo-k8s-sidecar:${build_tag}"
+                    sh "docker rmi gcr.io/library/cvallance/mongo-k8s-sidecar:${build_tag}"
+                }
             }
         }
         stage('Push') {
