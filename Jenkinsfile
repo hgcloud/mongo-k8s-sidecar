@@ -25,7 +25,7 @@ pipeline {
                 echo "3.Build Docker Image Stage"
                 script {
                    echo "build tag: ${build_tag}"
-                   result = sh(script: 'docker images|grep mongo-k8s-sidecar|grep '${build_tag}'', returnStdout: true)
+                   result = sh(script: 'docker images|grep mongo-k8s-sidecar|grep '\${build_tag}'', returnStdout: true)
                    echo "${result}"
                 }
             }
