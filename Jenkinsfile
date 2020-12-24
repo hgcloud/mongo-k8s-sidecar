@@ -24,8 +24,8 @@ pipeline {
         }
         stage('Build') {
             steps {
+                echo "3.Build Docker Image Stage"
                 script {
-                    echo "3.Build Docker Image Stage"
                     echo "workspace:`pwd`"
                 }
             }
