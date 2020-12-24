@@ -37,8 +37,8 @@ pipeline {
             steps {
                 echo "4.Push Docker Image Stage"
                 withCredentials([usernamePassword(credentialsId: 'gcrRegistry', passwordVariable: 'gcrRegistryPassword', usernameVariable: 'gcrRegistryUser')]) {
-                    sh("docker login -u ${gcrRegistryUser} -p ${gcrRegistryPassword} gcr.io", returnStdout: true)
-                    sh("docker push gcr.io/library/cvallance/mongo-k8s-sidecar:${build_tag}", returnStdout: true)
+                    sh(script: "docker login -u ${gcrRegistryUser} -p ${gcrRegistryPassword} gcr.io", returnStdout: true)
+                    sh(script: "docker push gcr.io/library/cvallance/mongo-k8s-sidecar:${build_tag}", returnStdout: true)
                 }
             }
         }
