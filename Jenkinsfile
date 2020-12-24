@@ -25,7 +25,7 @@ pipeline {
                 echo "3.Build Docker Image Stage"
                 script {
                    echo "build tag: ${build_tag}"
-                   result = sh(script: 'docker images|grep \'gcr.io/library/cvallance/mongo-k8s-sidecar\'|grep "${build_tag}"', returnStatus: true)
+                   result = sh(script: 'docker images|grep gcr.io/library/cvallance/mongo-k8s-sidecar|grep "${build_tag}"', returnStatus: true)
                    if ( result == 0 ) {
                        sh(script: "docker rmi gcr.io/library/cvallance/mongo-k8s-sidecar:${build_tag}", returnStdout: true)
                    }
@@ -40,6 +40,7 @@ pipeline {
                     sh(script: "docker login -u ${gcrRegistryUser} -p ${gcrRegistryPassword} gcr.io", returnStdout: true)
                     sh(script: "docker push gcr.io/library/cvallance/mongo-k8s-sidecar:${build_tag}", returnStdout: true)
                 }
+                sh(script: "docker rmi gcr.io/library/cvallance/mongo-k8s-sidecar:${build_tag}", returnStdout: true)
             }
         }
         stage('YAML') {
