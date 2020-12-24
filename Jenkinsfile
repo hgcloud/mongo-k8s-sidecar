@@ -28,7 +28,7 @@ pipeline {
                     echo "3.Build Docker Image Stage"
                     echo "workspace:`pwd`"
                     echo "build tag: ${build_tag}"
-                    result = sh(script: 'docker images|grep \'gcr.io/library/cvallance/mongo-k8s-sidecar\'|grep  ${build_tag} > /dev/null 2>&1', returnStdout: true)
+                    result = sh(script: 'docker images', returnStdout: true)
                     echo result
                     //if ( $? -eq 0 ) {
                     //    sh "docker rmi gcr.io/library/cvallance/mongo-k8s-sidecar:${build_tag}"
