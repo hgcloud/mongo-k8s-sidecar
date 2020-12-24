@@ -6,6 +6,11 @@ pipeline {
         stage('Clone') {
             steps {
                 echo "1.Clone Stage"
+                git url: "https://github.com/hgcloud/mongo-k8s-sidecar.git"
+                script {
+                    build_tag = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
+                }
+                echo "${build_tag}"
             }
         }
         stage('Test') {
