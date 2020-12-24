@@ -27,9 +27,6 @@ pipeline {
                 script {
                     echo "3.Build Docker Image Stage"
                     echo "workspace:`pwd`"
-                    echo "build tag: ${build_tag}"
-                    result = sh(script: 'docker images', returnStdout: true)
-                    echo "${result}"
                 }
             }
         }
