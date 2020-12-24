@@ -13,7 +13,7 @@ pipeline {
                 //echo "${build_tag}"
                 checkout scm
                 script {
-                    echo "build_tag: ${build_tag}"
+                    echo "build tag: ${build_tag}"
                 }
             }
         }
