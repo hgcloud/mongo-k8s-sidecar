@@ -29,15 +29,7 @@ pipeline {
                     echo "workspace:`pwd`"
                     echo "build tag: ${build_tag}"
                     result = sh(script: 'docker images', returnStdout: true)
-                    echo result
-                    //if ( $? -eq 0 ) {
-                    //    sh "docker rmi gcr.io/library/cvallance/mongo-k8s-sidecar:${build_tag}"
-                    //}
-
-                    //sh "docker build . -t gcr.io/library/cvallance/mongo-k8s-sidecar:${build_tag}"
-                    //sh "docker login gcr.io -u admin -p Harbor12345"
-                    //sh "docker push gcr.io/library/cvallance/mongo-k8s-sidecar:${build_tag}"
-                    //sh "docker rmi gcr.io/library/cvallance/mongo-k8s-sidecar:${build_tag}"
+                    echo "${result}"
                 }
             }
         }
