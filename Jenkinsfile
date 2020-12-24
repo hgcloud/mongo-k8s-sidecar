@@ -26,7 +26,10 @@ pipeline {
                 script {
                    echo "build tag: ${build_tag}"
                    result = sh(script: 'docker images|grep \'gcr.io/library/cvallance/mongo-k8s-sidecar\'|grep "${build_tag}"', returnStatus: true)
-                   echo "${result}"
+                   if ( result == 0 ) {
+                       sh(script: 'docker rmi gcr.io/library/cvallance/mongo-k8s-sidecar:${build_tag}', returnStdout: true)
+                   }
+                   sh(script: 'docker build . -t gcr.io/library/cvallance/mongo-k8s-sidecar:${image_tag}', returnStdout: true)
                 }
             }
         }
