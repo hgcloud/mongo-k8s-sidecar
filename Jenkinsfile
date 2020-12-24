@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label "master"
+        label "nodejs"
     }
     stages {
         stage('Prepare') {
@@ -25,7 +25,8 @@ pipeline {
                 echo "3.Build Docker Image Stage"
                 script {
                    echo "build tag: ${build_tag}"
-                   sh(returnStdout: true, script: 'docker images')
+                   result = sh(script: 'docker images|grep 'gcr.io/cvallance/mongo-k8s-sidecar'|grep  ${build_tag} > /dev/null 2>&1', returnStdout: true)
+                   echo "${result}"
                 }
             }
         }
