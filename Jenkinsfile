@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage('Prepare') {
             when {
-                branch 'origin/main'
+                branch 'master'
             }
             steps {
                 echo "1.Prepare Stage"
@@ -55,6 +55,11 @@ pipeline {
             steps {
                 echo "6. Deploy Stage"
             }
+        }
+    }
+     post {
+        always {
+            cleanWs()
         }
     }
 }
