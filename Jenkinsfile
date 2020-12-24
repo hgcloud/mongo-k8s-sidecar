@@ -4,6 +4,9 @@ pipeline {
     }
     stages {
         stage('Prepare') {
+            when {
+                branch 'main'
+            }
             steps {
                 echo "1.Prepare Stage"
                 //checkout scm
