@@ -6,15 +6,13 @@ pipeline {
         stage('Prepare') {
             steps {
                 echo "1.Prepare Stage"
-                //git url: "https://github.com/hgcloud/mongo-k8s-sidecar.git"
+                checkout scm
                 //script {
                 //    build_tag = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
+                //    if (env.BRANCH_NAME != 'master') {
+                //        build_tag = "${env.BRANCH_NAME}-${build_tag}"
+                //    }
                 //}
-                //echo "${build_tag}"
-                checkout scm
-                script {
-                    //echo "build tag: ${build_tag}"
-                }
             }
         }
         stage('Test') {
@@ -26,7 +24,8 @@ pipeline {
             steps {
                 echo "3.Build Docker Image Stage"
                 script {
-                    echo "workspace:`pwd`"
+                   echo "build tag: ${build_tag}"
+                   sh(script: 'docker images|grep \'gcr.io/library/cvallance/mongo-k8s-sidecar\'|grep  ${build_tag} > /dev/null 2>&1', returnStdout: true)
                 }
             }
         }
